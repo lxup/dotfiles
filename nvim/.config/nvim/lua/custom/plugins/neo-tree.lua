@@ -1,6 +1,10 @@
 return {
   'nvim-neo-tree/neo-tree.nvim',
   branch = 'v3.x',
+  keys = {
+    { '<leader>e', ':Neotree toggle<CR>', desc = 'Toggle Explorer', silent = true },
+    { '<leader>E', ':Neotree reveal<CR>', desc = 'Reveal File in Explorer', silent = true },
+  },
   dependencies = {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
@@ -21,8 +25,5 @@ return {
         },
       },
     }
-
-    vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = ' Toggle Explorer', silent = true })
-    vim.keymap.set('n', '<leader>E', ':Neotree reveal<CR>', { desc = ' Reveal File in Explorer', silent = true })
   end,
 }
