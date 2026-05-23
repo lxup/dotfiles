@@ -1,31 +1,49 @@
-{ config, pkgs, username, homeDirectory, ... }:
+{
+  config,
+  pkgs,
+  username,
+  homeDirectory,
+  ...
+}:
 
 {
   home.username = username;
   home.homeDirectory = homeDirectory;
   home.stateVersion = "23.11";
-  home.packages = with pkgs; [
-    git
-    python3
-    neovim
-    zed-editor
-  ] ++ (
-    if pkgs.stdenv.isDarwin then [
-      ghostty-bin
-    ] else [
-      ghostty
+  home.packages =
+    with pkgs;
+    [
+      git
+      python3
+      neovim
+      zed-editor
+      nixd
+      nil
     ]
-  );
+    ++ (
+      if pkgs.stdenv.isDarwin then
+        [
+          ghostty-bin
+        ]
+      else
+        [
+          ghostty
+        ]
+    );
 
   home.file = {
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim";
+    ".config/nvim".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim";
     ".config/starship.toml".source = ./config/starship.toml;
 
-    ".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/zed/settings.json";
-    ".config/zed/themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/zed/themes";
+    ".config/zed/settings.json".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/zed/settings.json";
+    ".config/zed/themes".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/zed/themes";
     # ".config/zed/keymap.json".source = ./config/zed/keymap.json;
 
-    ".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/ghostty";
+    ".config/ghostty".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/ghostty";
   };
 
   programs.home-manager.enable = true;
@@ -39,7 +57,10 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "docker" ];
+      plugins = [
+        "git"
+        "docker"
+      ];
     };
 
     initContent = builtins.readFile ./home/.zshrc;
