@@ -9,7 +9,13 @@
     python3
     neovim
     zed-editor
-  ];
+  ] ++ (
+    if pkgs.stdenv.isDarwin then [
+      ghostty-bin
+    ] else [
+      ghostty
+    ]
+  );
 
   home.file = {
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/nvim";
@@ -18,6 +24,8 @@
     ".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/zed/settings.json";
     ".config/zed/themes".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/zed/themes";
     # ".config/zed/keymap.json".source = ./config/zed/keymap.json;
+
+    ".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/ghostty";
   };
 
   programs.home-manager.enable = true;
