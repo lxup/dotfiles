@@ -7,6 +7,8 @@
   home.packages = with pkgs; [
     git
     python3
+    neovim
+    zed-editor
   ];
 
   home.file = {
