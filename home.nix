@@ -19,6 +19,7 @@
       zed-editor
       nixd
       nil
+      nerd-fonts.jetbrains-mono
     ]
     ++ (
       if pkgs.stdenv.isDarwin then
