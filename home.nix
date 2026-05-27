@@ -25,6 +25,9 @@
       if pkgs.stdenv.isDarwin then
         [
           ghostty-bin
+          fastlane
+          cocoapods
+          ruby
         ]
       else
         [
