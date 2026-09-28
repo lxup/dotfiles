@@ -20,9 +20,12 @@
       nixd
       nil
       nerd-fonts.jetbrains-mono
+      nodejs
+      pnpm
+      bun
     ]
     ++ (
-      if pkgs.stdenv.isDarwin then
+      if pkgs.stdenv.hostPlatform.isDarwin then
         [
           ghostty-bin
           fastlane
@@ -66,6 +69,10 @@
         "docker"
       ];
     };
+
+    profileExtra = pkgs.lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    '';
 
     initContent = builtins.readFile ./home/.zshrc;
   };
