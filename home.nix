@@ -7,6 +7,7 @@
 }:
 
 {
+  nixpkgs.config.allowUnfree = true;
   home.username = username;
   home.homeDirectory = homeDirectory;
   home.stateVersion = "23.11";
@@ -23,6 +24,11 @@
       nodejs
       pnpm
       bun
+      claude-code
+      age
+      sops
+      talhelper
+      talosctl
     ]
     ++ (
       if pkgs.stdenv.hostPlatform.isDarwin then
